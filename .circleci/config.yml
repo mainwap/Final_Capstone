@@ -7,7 +7,7 @@ jobs: # a collection of steps
       - checkout 
       - run:
           name: build-all-step
-          command: echo "I build for all except dev and master"
+          command: echo "I build for all except dev and master.."
   build_dev:
     docker: 
       - image: circleci/node:10.16.3 
