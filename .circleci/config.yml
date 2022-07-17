@@ -36,7 +36,7 @@ workflows:
             branches:
               ignore:
                 - development
-                - master
+                - main
   build_dev:    
     jobs:
       - build_dev:
@@ -50,4 +50,4 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
