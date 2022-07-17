@@ -1,4 +1,3 @@
-version: 2.0 # use CircleCI 2.0
 jobs: # a collection of steps  
   build_all: 
     docker: 
