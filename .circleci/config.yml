@@ -27,7 +27,7 @@ jobs:
             . venv/bin/activate
             make lint
             
-  create-small-cluster:
+  create-cluster:
     executor: aws-eks/python3
     parameters:
       cluster-name:
@@ -83,12 +83,10 @@ jobs:
       - run:
           name: Update kubconfig
           command: |
-            aws eks --region us-east-2 update-kubeconfig --name eks-demo-deployment
+            aws eks --region us-east-2 update-kubeconfig --name mycapstoneeks
             aws sts get-caller-identity
             cat ~/.kube/config
             kubectl get namespace
-            kubectl delete namespace production-green
-            kubectl delete namespace production-blue
             sleep 20
             kubectl create namespace production-green
             kubectl create namespace production-blue
@@ -134,7 +132,7 @@ jobs:
       - run:
           name: Update kubconfig
           command: |
-            aws eks --region us-east-2 update-kubeconfig --name eks-demo-deployment
+            aws eks --region us-east-2 update-kubeconfig --name mycapstoneeks
             aws sts get-caller-identity
             cat ~/.kube/config
             kubectl get namespace
@@ -144,7 +142,7 @@ jobs:
           name: Create K8 App on Blue and Green
           command: |
             TAG=0.1.${CIRCLE_WORKFLOW_ID:0:2}
-            aws eks --region us-east-2 update-kubeconfig --name eks-demo-deployment
+            aws eks --region us-east-2 update-kubeconfig --name mycapstoneeks
             echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
             dockerpath=$DOCKER_PATH:$TAG
             echo "Initialise Green deployment:"
@@ -185,7 +183,7 @@ jobs:
       - run:
           name: helper kubconfig commands
           command: |
-            aws eks --region us-east-2 update-kubeconfig --name eks-demo-deployment
+            aws eks --region us-east-2 update-kubeconfig --name mycapstoneeks
             echo "URL Green"
             kubectl get services --namespace production-green --output jsonpath='{.items[0].status.loadBalancer.ingress[0].hostname}'
             kubectl get svc -n=production-blue -o wide
@@ -197,8 +195,8 @@ version: 2.1
 workflows:
   deployment:
     jobs:
-    #- create-small-cluster:
-    #    cluster-name: eks-demo-deployment
+    - create-cluster:
+        cluster-name: mycapstoneeks
       - initialise-k8
       - build-app:
           requires: [initialise-k8]
