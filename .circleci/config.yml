@@ -7,8 +7,7 @@ jobs: # a collection of steps
       - checkout 
       - run:
           name: build-all-step
-          command: echo "I build for all except dev and master.."
-          command: echo "build app and lint app and upload"
+          command: echo "I build for all except dev and master.. build, lint, upload everytime"
   build_dev:
     docker: 
       - image: circleci/node:10.16.3 
@@ -17,8 +16,7 @@ jobs: # a collection of steps
       - checkout 
       - run:
           name: build-dev-step
-          command: echo "I build only for development"
-          command: echo "update dev only"
+          command: echo "I build only for development.. update blue"
   build_master:
     docker: 
       - image: circleci/node:10.16.3 
@@ -27,8 +25,7 @@ jobs: # a collection of steps
       - checkout 
       - run:
           name: build-master-step
-          command: echo "I build only for master"
-          command: echo "create EKS and initialise k8 here"
+          command: echo "I build only for master.. deploy infra, initialize k8 once"
 version: 2.1
 workflows:
   build_all:    
