@@ -27,6 +27,7 @@ jobs: # a collection of steps
       - run:
           name: build-master-step
           command: echo "I build only for master"
+version: 2.1
 workflows:
   build_all:    
     jobs:
@@ -43,7 +44,7 @@ workflows:
             branches:
               only:
                 - development
-   build_master:    
+  build_master:    
     jobs:
       - build_master:
           filters:
