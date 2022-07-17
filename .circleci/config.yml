@@ -6,7 +6,7 @@ jobs: # a collection of steps
       - checkout 
       - run:
           name: build-master-step
-          command: echo "I build only for main branch.. deploy infra, initialize k8 first time"
+          command: echo "I build only for main branch.. deploy infra, initialize k8 first time."
 version: 2.1
 workflows:
   deploy-infra:    
