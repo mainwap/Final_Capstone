@@ -83,7 +83,7 @@ jobs:
       - run:
           name: Update kubconfig
           command: |
-            aws eks --region us-east-2 update-kubeconfig --name mycapstoneeks
+            aws eks --region us-east-1 update-kubeconfig --name mycapstoneeks
             aws sts get-caller-identity
             cat ~/.kube/config
             kubectl get namespace
@@ -183,7 +183,7 @@ jobs:
       - run:
           name: helper kubconfig commands
           command: |
-            aws eks --region us-east-2 update-kubeconfig --name mycapstoneeks
+            aws eks --region us-east-1 update-kubeconfig --name mycapstoneeks
             echo "URL Green"
             kubectl get services --namespace production-green --output jsonpath='{.items[0].status.loadBalancer.ingress[0].hostname}'
             kubectl get svc -n=production-blue -o wide
