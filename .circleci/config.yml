@@ -105,8 +105,8 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
       - run: |
-          TAG=0.1.${CIRCLE_WORKFLOW_ID:0:2}
-          docker build -tag $DOCKER_PATH:$TAG .
+          TAG=0.2.${CIRCLE_WORKFLOW_ID:0:2}
+          docker build -t $DOCKER_PATH:$TAG .
           docker push $DOCKER_PATH:$TAG
           
   deploy-app:
