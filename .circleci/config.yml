@@ -204,7 +204,7 @@ workflows:
       #     requires: [create-cluster]
       # - build-app:
       #     requires: [initialise-k8]
-      - upload-docker:
+      - upload-docker
           #requires: [build-app]
       - deploy-app:
           requires: [upload-docker]
