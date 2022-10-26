@@ -104,10 +104,13 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.14
-      - run: |
-          TAG="0.1.$CIRCLE_BUILD_NUM"
-          docker build -t ziggy04/multibranch:$TAG .
-          docker push ziggy04/multibranch:$TAG
+      - run: 
+          name: Upload Docker
+          command: |
+          TAG="0.1.${CIRCLE_WORKFLOW_ID:0:2}"
+          echo $TAG
+          docker build -t "${DOCKER_PATH}:${TAG}" .
+          docker push "${DOCKER_PATH}:${TAG}"
           
   deploy-app:
     docker:
@@ -195,14 +198,14 @@ version: 2.1
 workflows:
   deployment:
     jobs:
-      - create-cluster:
-          cluster-name: ziggy
-      - initialise-k8:
-          requires: [create-cluster]
-      - build-app:
-          requires: [initialise-k8]
+      # - create-cluster:
+      #     cluster-name: ziggy
+      # - initialise-k8:
+      #     requires: [create-cluster]
+      # - build-app:
+      #     requires: [initialise-k8]
       - upload-docker:
-          requires: [build-app]
+          #requires: [build-app]
       - deploy-app:
           requires: [upload-docker]
           filters:
