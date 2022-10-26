@@ -202,12 +202,12 @@ jobs:
 workflows:
   deployment:
     jobs:
-      - create-cluster:
-          cluster-name: ziggy
-      - initialise-k8:
-          requires: [create-cluster]
-      - build-app:
-          requires: [initialise-k8]
+      #- create-cluster:
+          #cluster-name: ziggy
+      #- initialise-k8:
+          #requires: [create-cluster]
+      - build-app
+          #requires: [initialise-k8]
       - upload-docker:
           requires: [build-app]
       - deploy-app:
