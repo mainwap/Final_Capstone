@@ -107,10 +107,10 @@ jobs:
       - run: 
           name: Upload Docker
           command: |
-          TAG="0.1.${CIRCLE_WORKFLOW_ID:0:2}"
-          echo $TAG
-          docker build -t "${DOCKER_PATH}:${TAG}" .
-          docker push "${DOCKER_PATH}:${TAG}"
+            TAG="0.1.${CIRCLE_WORKFLOW_ID:0:2}"
+            echo $TAG
+            docker build -t "${DOCKER_PATH}:${TAG}" .
+            docker push "${DOCKER_PATH}:${TAG}"
           
   deploy-app:
     docker:
