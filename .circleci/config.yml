@@ -105,7 +105,8 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
       - run: |
-          TAG="0.1.${CIRCLE_WORKFLOW_ID:0:2}"
+          #TAG="0.1.${CIRCLE_WORKFLOW_ID:0:2}"
+          $ docker build -t my-python-app .
           docker build -t echo $DOCKER_PATH:$TAG .
           docker push echo $DOCKER_PATH:$TAG
           
